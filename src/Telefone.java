@@ -11,10 +11,15 @@ public class Telefone {
     private Map<String, String> listaDeContatos = new HashMap<>();
     private Scanner scanner = new Scanner(System.in);
     private boolean chamadaEmEspera = false;
+<<<<<<< HEAD
     private String contatoEmChamada1 = null;
     private String contatoEmChamada2 = null;
     private String contatoEmEspera = null;
     private String chamadaAndamento = null;
+=======
+    private String contatoEmChamada = null;
+    private String contatoEmEspera = null;
+>>>>>>> 5d414452c8baca266d9d84e4fadae81b16c53747
 
 
     public void addContato(String nome, String numero){
@@ -59,19 +64,29 @@ public class Telefone {
     }
 
     public void ligar(String numero) {
+<<<<<<< HEAD
         if (chamadaAtiva) {
+=======
+        if (chamadaAndamento) {
+>>>>>>> 5d414452c8baca266d9d84e4fadae81b16c53747
             System.out.println("Deixando chamada ativa em espera. ");
             chamadaEmEspera = true;
             contatoEmEspera = listaDeContatos.get(numero);
             System.out.println(numero + " em espera. ");
         } else {
             String contato = listaDeContatos.get(numero);
+<<<<<<< HEAD
             chamadaAtiva = true;
             contatoEmChamada1 = contato;
+=======
+            chamadaAndamento = true;
+            contatoEmChamada = contato;
+>>>>>>> 5d414452c8baca266d9d84e4fadae81b16c53747
             System.out.println("Ligando para " + numero);
         }
     }
 
+<<<<<<< HEAD
     public void recebendoChamada(String nome) {
         chamadaAndamento = listaDeContatos.get(nome);
         System.out.println("O telefone" + chamadaAndamento + " está tocando... Digite 1 para atender ou 2 para recusar: ");
@@ -197,10 +212,55 @@ public class Telefone {
             System.out.println("Já tem uma chamada em espera. ");
         } else {
             System.out.println("Colocando chamada em espera. ");
+=======
+    public void atender() {
+        if (chamadaAndamento) {
+            System.out.println("Em chamada com: " + contatoEmChamada);
+        } else if (chamadaEmEspera) {
+            System.out.println("Atendendo chamada em espera: " + contatoEmEspera);
+            chamadaAndamento = true;
+            chamadaEmEspera = false;
+            contatoEmChamada = contatoEmEspera;
+            contatoEmEspera = null;
+        } else {
+            System.out.println("Não tem chamada. ");
+        }
+    }
+
+    public void desligarChamada() {
+        if (chamadaAndamento) {
+            System.out.println("Chamada encerrada. ");
+            chamadaAndamento = false;
+            contatoEmChamada = null;
+            if (chamadaEmEspera) {
+                System.out.println("Chamada em espera agora ativa. ");
+                chamadaAndamento = true;
+                chamadaEmEspera = false;
+                contatoEmChamada = contatoEmEspera;
+                contatoEmEspera = null;
+            }
+        } else {
+            System.out.println("Não há chamada. ");
+        }
+    }
+
+    public void chamadaEmEspera() {
+        if (chamadaAndamento) {
+            System.out.println("Você já tem uma chamada ativa. ");
+            chamadaEmEspera = true;
+            chamadaAndamento = false;
+            contatoEmEspera = contatoEmChamada;
+            contatoEmChamada = null;
+        } else if (chamadaEmEspera) {
+            System.out.println("Já tem uma chamada em espera. ");
+        } else {
+            System.out.println("Chamada em espera. ");
+>>>>>>> 5d414452c8baca266d9d84e4fadae81b16c53747
             chamadaEmEspera = true;
         }
     }
 
+<<<<<<< HEAD
     public  void conferencia(String chamada) {
         conferencia.add(chamada);
         System.out.println("Chamada adicionada a conferência: " + chamada);
@@ -229,6 +289,11 @@ public class Telefone {
     public void correioVoz(String msg) {
         correioVoz.add(msg);
         System.out.println("Mensagem de voz recebida: ");
+=======
+    public void correioVoz(String msg) {
+        correioVoz.add(msg);
+        System.out.println("Mensagem de voz recebida. ");
+>>>>>>> 5d414452c8baca266d9d84e4fadae81b16c53747
     }
 
     public void listaCorreioVoz() {
@@ -276,8 +341,11 @@ public class Telefone {
         telefone.correioVoz("Mensagem de voz 1");
 
         while (true) {
+<<<<<<< HEAD
             telefone.recebendoChamada("Contato 1");
             telefone.recebendoChamada("Contato 2");
+=======
+>>>>>>> 5d414452c8baca266d9d84e4fadae81b16c53747
             telefone.listarContatos();
             System.out.println("Buscar contato, '1' para correio de voz ou 'sair': ");
             String nome = telefone.scanner.nextLine();
@@ -294,7 +362,11 @@ public class Telefone {
         }
         telefone.chamadaEmEspera();
         telefone.atender();
+<<<<<<< HEAD
         //telefone.desligarChamada();
+=======
+        telefone.desligarChamada();
+>>>>>>> 5d414452c8baca266d9d84e4fadae81b16c53747
 
 
     }
