@@ -108,8 +108,9 @@ public class Telefone {
         }
         while (chamadaAtiva && contatoEmEspera != null) {
             System.out.println("1 para desligar chamada em andamento: " + chamadaAndamento);
-            System.out.println("2 para reativar chamada em espera: " + contatoEmEspera);
-            System.out.println("3 para conferência entre chamadas: " + contatoEmEspera + " e " + chamadaAndamento);
+            System.out.println("2 para desligar chamada em espera: " + contatoEmEspera);
+            System.out.println("3 para reativar chamada em espera: " + contatoEmEspera);
+            System.out.println("4 para conferência entre chamadas: " + contatoEmEspera + " e " + chamadaAndamento);
             int opcao = scanner.nextInt();
             scanner.nextLine();
 
@@ -117,24 +118,31 @@ public class Telefone {
                 case 1:
                     desligarChamada(chamadaAndamento);
                     chamadaAndamento = contatoEmEspera;
+                    contatoEmEspera = null;
+                    System.out.println("Chamada em andamento: " + chamadaAndamento);
                     break;
                 case 2:
+                    desligarChamada(contatoEmEspera);
+                    contatoEmEspera = null;
+                    System.out.println("Chamada em andamento: " + chamadaAndamento);
+                    break;
+                case 3:
                     String espera = chamadaAndamento;
                     chamadaAndamento = contatoEmEspera;
                     contatoEmEspera = espera;
                     System.out.println("Chamada em andamento: " + chamadaAndamento);
                     System.out.println("Chamada em espera: " + contatoEmEspera);
                     break;
-                case 3:
+                case 4:
                     Telefone telefone = new Telefone();
                     telefone.conferencia(chamadaAndamento);
                     telefone.conferencia(contatoEmEspera);
                     listaConferencia();
-                    break;
+                    // break;
                 default:
                     System.out.println("Opção inválida. ");
             }
-            desligarChamada(chamadaAndamento);
+            // desligarChamada(chamadaAndamento);
 
         }
     }
