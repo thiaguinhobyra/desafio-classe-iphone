@@ -17,7 +17,7 @@ public class IpodServiceImpl implements IpodService {
     public void adicionarMusica(String titulo, String artista, int tempo) {
         Musica musica = new Musica(titulo, artista, tempo);
         biblioteca.put(titulo, musica);
-        System.out.println("Musica adicionada com sucesso! ");
+        System.out.println("Música adicionada com sucesso! ");
     }
 
     @Override
@@ -26,17 +26,11 @@ public class IpodServiceImpl implements IpodService {
         for (Musica musica : biblioteca.values()) {
             System.out.println(musica.getTitulo() + " - " + musica.getArtista());
         }
-        //return biblioteca;
-
     }
 
     @Override
     public void selecionarMusica(String titulo) {
-        //for (Ipod musica : biblioteca) {
-            //if (musica.getTitulo().equals(titulo)) {
             if (biblioteca.containsKey(titulo)) {
-                //musicaAtual = musica;
-                //tocando = true;
                 tocar(titulo);
             } else {
                 System.out.println("Música não encontrada na biblioteca. ");
