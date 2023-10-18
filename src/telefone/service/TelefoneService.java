@@ -6,7 +6,7 @@ public interface TelefoneService {
     void addContato(String nome, String numero);
     void listarContatos();
     void buscarContato(String nome);
-    void ligar(String nomeo);
+    void ligar(String nome, String numero);
     void atenderChamada();
     void correioVoz(String msg);
     void listarCorreioVoz();

@@ -43,7 +43,7 @@ public class TelefoneServiceImpl implements TelefoneService{
         if (listaDeContatos.containsKey(nome)) {
             Contato contato = listaDeContatos.get(nome);
             System.out.println(contato.getNome() + " - " + contato.getNumero());
-            opcoes(nome);
+            opcoes(contato.getNome(), contato.getNumero());
         } else {
             System.out.println("Contato não encontrado. ");
         }
@@ -69,17 +69,17 @@ public class TelefoneServiceImpl implements TelefoneService{
         }
     }
 
-    public void buscarChamada(String nome) {
+    public void buscarChamada(String nome, String numero) {
         if (listaDeChamadas.containsKey(nome)) {
             chamadaAndamento = nome;
             System.out.println(nome + " - " + nome);
-            opcoes(nome);
+            opcoes(nome, numero);
         } else {
             System.out.println("Chamada não encontrada. ");
         }
     }
 
-    public void opcoes(String nome) {
+    public void opcoes(String nome, String numero) {
         System.out.println("Contato " + nome + ":");
         System.out.println("1. Ligar");
         System.out.println("2. Voltar");
@@ -88,7 +88,7 @@ public class TelefoneServiceImpl implements TelefoneService{
 
         switch (opcao) {
             case 1:
-                ligar(nome);
+                ligar(nome, numero);
                 break;
             case 2:
                 break;
@@ -98,7 +98,7 @@ public class TelefoneServiceImpl implements TelefoneService{
     }
 
     @Override
-    public void ligar(String nome) {
+    public void ligar(String nome, String numero) {
         if (chamadaAtiva && chamadaAndamento != null) {
             System.out.println("Deixando chamada ativa em espera. ");
             System.out.println("Deixando chamada ativa em espera. ");
@@ -106,17 +106,21 @@ public class TelefoneServiceImpl implements TelefoneService{
             // String contato = listaDeContatos.get(numero);
             // contatoEmEspera = listaDeContatos.get(numero);
             contatoEmEspera = chamadaAndamento;
+            Contato contato = new Contato(nome, numero);
+            listaDeChamadas.put(nome, contato);
+            chamadaAndamento = nome;
             //contatoEmChamada2 = contato;
             System.out.println(contatoEmEspera + " em espera. ");
+            System.out.println(chamadaAndamento + " em andamento. ");
             ligando = true;
         } else {
-            String contato = nome;
+            Contato contato = new Contato(nome, numero);
+            listaDeChamadas.put(nome, contato);
             chamadaAtiva = true;
-            contatoEmChamada1 = contato;
-            TelefoneServiceImpl telefoneServiceImpl = new TelefoneServiceImpl();
-            telefoneServiceImpl.buscarChamada(nome);
+            buscarChamada(contato.getNome(), contato.getNumero());
+            chamadaAndamento = contato.getNome();
             System.out.println("Ligando para " + chamadaAndamento);
-            System.out.println("Em chamada com " + contatoEmChamada1);
+            System.out.println("Em chamada com " + chamadaAndamento);
             ligando = true;
         }
     }
@@ -193,13 +197,14 @@ public class TelefoneServiceImpl implements TelefoneService{
                             default:
                                 System.out.println("Opção inválida. ");
                         }
-                    }
-                    listarContatos();
-                    System.out.println("Digite o nome para buscar contato: ");
-                    String BucarContato = scanner.nextLine();
+                    } else {
+                        listarContatos();
+                        System.out.println("Digite o nome para buscar contato: ");
+                        String BucarContato = scanner.nextLine();
 
-                    buscarContato(BucarContato);
-                    chamando = false;
+                        buscarContato(BucarContato);
+                        chamando = false;
+                    }
                     break;
                 case 2:
                     System.out.println("Nome do contato: ");
