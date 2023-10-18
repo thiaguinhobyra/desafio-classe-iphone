@@ -19,7 +19,6 @@ public class SafariServiceImpl implements SafariService{
         abasAbertas.put(nomeSite, aba);
         paginaAtual = nomeSite;
         System.out.println("Nova aba aberta! " + paginaAtual);
-        //listarAbasAbertas();
     }
 
     @Override
@@ -30,9 +29,7 @@ public class SafariServiceImpl implements SafariService{
         }
         if (abasAbertas.size() > 0) {
             System.out.println("Aba atual: " + paginaAtual);
-            //opcoes(paginaAtual);
         } else {
-            //opcoes(paginaAtual);
             System.out.println("Nenhuma aba aberta.");
         }
 

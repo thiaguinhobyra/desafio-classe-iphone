@@ -1,7 +1,5 @@
 package safari.service;
 
-import safari.model.Aba;
-
 public interface SafariService {
     void abaNova(String nomeSite, String url);
     void listarAbasAbertas();
