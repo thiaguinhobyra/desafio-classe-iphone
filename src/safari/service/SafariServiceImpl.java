@@ -64,11 +64,18 @@ public class SafariServiceImpl implements SafariService{
 
                 switch (opcao) {
                     case 1:
-                        System.out.println("Abra uma nova aba digite o nome: ");
-                        String nome = scanner.nextLine();
-                        System.out.println("Abra uma nova aba digite a URL: ");
+                        System.out.println("Endereço do site: ");
                         String url = scanner.nextLine();
-                        abaNova(nome, url);
+                        int primeiroPonto = url.indexOf(".");
+                        if (primeiroPonto != -1) {
+                            int segundoPonto = url.indexOf(".", primeiroPonto + 1);
+                            if (segundoPonto != -1) {
+                                String nome = url.substring(primeiroPonto + 1, segundoPonto);
+                                abaNova(nome, url);
+                            } else {
+                                System.out.println("O site não é válido.");
+                            }
+                        }
                         break;
                     case 2:
                         listarAbasAbertas();
