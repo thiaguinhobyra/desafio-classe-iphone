@@ -1,4 +1,0 @@
-package telefone;
-
-public class Telefone {
-}

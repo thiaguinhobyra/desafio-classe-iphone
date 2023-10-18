@@ -1,13 +1,14 @@
 package telefone.service;
 
-import telefone.Telefone;
+import telefone.model.Contato;
 
 public interface TelefoneService {
     void addContato(String nome, String numero);
     void listarContatos();
     void buscarContato(String nome);
-    void ligar(Telefone telefone);
-    void atender(Telefone telefone);
-    void correioVoz(Telefone telefone, String msg);
-    void listarCorreioVoz(Telefone telefone);
+    void ligar(String nomeo);
+    void atenderChamada();
+    void correioVoz(String msg);
+    void listarCorreioVoz();
+    void listarChamadas();
 }
