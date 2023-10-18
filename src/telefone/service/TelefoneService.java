@@ -7,7 +7,7 @@ public interface TelefoneService {
     void listarContatos();
     void buscarContato(String nome);
     void ligar(String nome, String numero);
-    void atenderChamada();
+    void atenderChamada(String nome);
     void correioVoz(String msg);
     void listarCorreioVoz();
     void listarChamadas();
