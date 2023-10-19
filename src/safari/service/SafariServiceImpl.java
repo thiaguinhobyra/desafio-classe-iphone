@@ -137,17 +137,8 @@ public class SafariServiceImpl implements SafariService{
         System.out.println("Página atualizada");
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         SafariServiceImpl safariService = new SafariServiceImpl();
         safariService.opcoes();
-        /*SafariServiceImpl safariServiceImpl = new SafariServiceImpl();
-
-        System.out.println("Abra uma nova aba digite o nome: ");
-        String nome = safariServiceImpl.scanner.nextLine();
-        System.out.println("Abra uma nova aba digite a url: ");
-        String url = safariServiceImpl.scanner.nextLine();
-        safariServiceImpl.abaNova(nome, url);
-
-        safariServiceImpl.listarAbasAbertas();*/
-    }
+    }*/
 }

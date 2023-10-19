@@ -26,6 +26,9 @@ public class IpodServiceImpl implements IpodService {
         for (Musica musica : biblioteca.values()) {
             System.out.println(musica.getTitulo() + " - " + musica.getArtista());
         }
+        System.out.println("Selecione a música: ");
+        String novaMusica = scanner.nextLine();
+        selecionarMusica(novaMusica);
     }
 
     @Override
@@ -35,7 +38,7 @@ public class IpodServiceImpl implements IpodService {
             } else {
                 System.out.println("Música não encontrada na biblioteca. ");
             }
-       // }
+            opcoesIpod(titulo);
     }
 
     @Override
@@ -50,7 +53,7 @@ public class IpodServiceImpl implements IpodService {
             }
         if (tocando) {
             System.out.println("Tocando a música: " + musicaAtual);
-            opcoes(titulo);
+            opcoesIpod(titulo);
         }
     }
 
@@ -59,17 +62,20 @@ public class IpodServiceImpl implements IpodService {
         if (tocando) {
             tocando = false;
             System.out.println("Música pausada: " + musicaAtual);
-            opcoes(musica);
+            opcoesIpod(musica);
         } else {
             System.out.println("Nenhuma música tocando no momento.");
         }
     }
 
-    public void opcoes(String titulo) {
+
+    public void opcoesIpod(String titulo) {
         if (tocando) {
             System.out.println("Musica " + titulo + ":");
             System.out.println("1. Pausar");
             System.out.println("2. Parar");
+            System.out.println("3. Biblioteca");
+            System.out.println("4. Selecionar nova música");
             int opcao = scanner.nextInt();
             scanner.nextLine();
 
@@ -80,6 +86,15 @@ public class IpodServiceImpl implements IpodService {
                 case 2:
                     tocando = false;
                     musicaAtual = null;
+                    break;
+                case 3:
+                    listarMusicas();
+                    break;
+                case 4:
+                    listarMusicas();
+                    System.out.println("Selecione a música: ");
+                    String novaMusica = scanner.nextLine();
+                    selecionarMusica(novaMusica);
                     break;
                 default:
                     System.out.println("Opção inválida. ");
@@ -102,25 +117,6 @@ public class IpodServiceImpl implements IpodService {
                 default:
                     System.out.println("Opção inválida. ");
             }
-        }
-    }
-    public static void main(String[] args) {
-        IpodServiceImpl ipodServiceImpl = new IpodServiceImpl();
-
-        ipodServiceImpl.adicionarMusica("Música 1", "Artista 1", 3);
-        ipodServiceImpl.adicionarMusica("Música 2", "Artista 2", 4);
-        ipodServiceImpl.adicionarMusica("Música 3", "Artista 3", 3);
-
-        while (true) {
-            ipodServiceImpl.listarMusicas();
-            System.out.println("Escolha o titulo da música ou digite 'sair': ");
-            String opcao = ipodServiceImpl.scanner.nextLine();
-
-            if (opcao.equalsIgnoreCase("sair")) {
-                break;
-            }
-
-            ipodServiceImpl.selecionarMusica(opcao);
         }
     }
 }
