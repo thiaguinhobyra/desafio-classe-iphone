@@ -11,4 +11,5 @@ public interface TelefoneService {
     void correioVoz(String msg);
     void listarCorreioVoz();
     void listarChamadas();
+    void listarEsperas();
 }

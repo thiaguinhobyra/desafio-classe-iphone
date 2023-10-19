@@ -40,7 +40,6 @@ public class IpodServiceImpl implements IpodService {
 
     @Override
     public void tocar(String titulo) {
-        //for (Ipod musica : biblioteca) {
             if (musicaAtual == null) {
                 musicaAtual = titulo;
                 tocando = true;
@@ -49,7 +48,6 @@ public class IpodServiceImpl implements IpodService {
                 System.out.println("Nova música selecionada: " + musicaAtual);
                 tocando = true;
             }
-        //}
         if (tocando) {
             System.out.println("Tocando a música: " + musicaAtual);
             opcoes(titulo);
