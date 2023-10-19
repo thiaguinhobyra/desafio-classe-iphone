@@ -49,17 +49,6 @@ public class TelefoneServiceImpl implements TelefoneService{
     }
 
     @Override
-    /*public void listarChamadas() {
-        System.out.println("Chamadas em andamento: ");
-        for (Contato contato : listaDeChamadas.values()) {
-            System.out.println(contato.getNome() + " - " + contato.getNumero());
-        }
-        if (listaDeChamadas.size() > 0) {
-            System.out.println("Chamada atual: " + listaDeChamadas.values());
-        } else {
-            System.out.println("Nenhuma chamada em andamento");
-        }
-    }*/
     public void listarChamadas() {
         System.out.println("Chamadas em andamento: ");
 
@@ -92,7 +81,6 @@ public class TelefoneServiceImpl implements TelefoneService{
     }
 
     public void opcoes(String nome, String numero) {
-        //System.out.println("Contato " + nome + ":");
         System.out.println("1. Ligar");
         System.out.println("2. Voltar");
         int opcao = scanner.nextInt();
@@ -115,13 +103,10 @@ public class TelefoneServiceImpl implements TelefoneService{
             System.out.println("Deixando chamada ativa em espera. ");
             System.out.println("Deixando chamada ativa em espera. ");
             chamadaEmEspera = true;
-            // String contato = listaDeContatos.get(numero);
-            // contatoEmEspera = listaDeContatos.get(numero);
             contatoEmEspera = chamadaAndamento;
             Contato contato = new Contato(nome, numero);
             listaDeChamadas.put(nome, contato);
             chamadaAndamento = nome;
-            //contatoEmChamada2 = contato;
             System.out.println(contatoEmEspera + " em espera. ");
             System.out.println(chamadaAndamento + " em andamento. ");
             ligando = true;
@@ -129,10 +114,8 @@ public class TelefoneServiceImpl implements TelefoneService{
             Contato contato = new Contato(nome, numero);
             listaDeChamadas.put(nome, contato);
             chamadaAtiva = true;
-            //buscarChamada(contato.getNome(), contato.getNumero());
             chamadaAndamento = contato.getNome();
             System.out.println("Ligando para " + chamadaAndamento);
-            //System.out.println("Em chamada com " + chamadaAndamento);
             ligando = true;
         }
     }
@@ -161,7 +144,6 @@ public class TelefoneServiceImpl implements TelefoneService{
                 if (!chamadaAtiva && chamando) {
                     listaDeChamadas.put(contato.getNome(), contato);
                     chamadaAndamento = contato.getNome();
-                    //chamando = false;
                     System.out.println("Em chamada com: " + chamadaAndamento);
                     chamadaAtiva = true;
                     chamadaEmEspera = false;
@@ -178,7 +160,6 @@ public class TelefoneServiceImpl implements TelefoneService{
                         chamadaEmEspera = true;
                     } else if (chamadaEmEspera) {
                         while (chamadaAtiva && chamadaEmEspera) {
-                            // TODO: CORRIGIR WHILE PARA DAR OPÇÃO DE DESLIGAR CHAMADA APOS UMA FOR ESCOLHIDA
                             System.out.println("1. para desligar chamada em andamento: " + chamadaAndamento);
                             System.out.println("2. para desligar chamada em espera: " + contatoEmEspera);
                             System.out.println("3. para reativar chamada em espera: " + contatoEmEspera);
@@ -188,16 +169,9 @@ public class TelefoneServiceImpl implements TelefoneService{
                             switch (opcaoChamadas) {
                                 case 1:
                                     desligarChamada(chamadaAndamento);
-                                    //chamadaAndamento = contatoEmEspera;
-                                    //chamadaEmEspera = false;
-                                    //contatoEmEspera = null;
-                                    //System.out.println("Chamada em andamento: " + chamadaAndamento);
-                                    break;
+                                   break;
                                 case 2:
                                     desligarChamada(contatoEmEspera);
-                                    //chamadaEmEspera = false;
-                                    //contatoEmEspera = null;
-                                    //System.out.println("Chamada em andamento: " + chamadaAndamento);
                                     break;
                                 case 3:
                                     String espera = chamadaAndamento;
@@ -212,7 +186,6 @@ public class TelefoneServiceImpl implements TelefoneService{
                                         listaDeChamadas.remove(contatoAdd.getNome());
                                         listaDeEspera.remove(contatoAdd.getNome());
                                     }
-                                    //conferencia(contatoEmEspera);
                                     chamadaEmEspera = false;
                                     contatoEmEspera = null;
                                     chamadaAndamento = null;
@@ -225,7 +198,6 @@ public class TelefoneServiceImpl implements TelefoneService{
                         }
                     } else {
                         chamando = false;
-                        //chamadaAndamento = conferencia.toString();
                         if (!conferencia.isEmpty())chamadaAndamento = conferencia.toString();
                         if (!chamadaAndamento.isEmpty())chamadaAndamento = listaDeChamadas.toString();
                         System.out.println("Em chamada com: " + chamadaAndamento);
@@ -355,11 +327,7 @@ public class TelefoneServiceImpl implements TelefoneService{
     public void desligarChamada(String nome) {
         System.out.println("desligando " + nome);
         if (!conferencia.isEmpty()) {
-            //System.out.println("Nenhuma chamada em andamento.");
-            //listaDeChamadas.remove(nome);
-            //chamadaAndamento = listaDeChamadas.keySet().iterator().next();
-            //chamadaAtiva = false;
-            contatoEmEspera = null;
+           contatoEmEspera = null;
             chamadaEmEspera = false;
             System.out.println("Chamada " + nome + " encerrada, sem chamadas em espera. ");
             /*TODO: CORRIGIR MSG */
@@ -373,8 +341,6 @@ public class TelefoneServiceImpl implements TelefoneService{
             } else {
                 chamadaAndamento = null;
                 chamadaAtiva = false;
-                //contatoEmEspera = null;
-                // TODO: contatoEmEspera substituir por listaEspera;
             }
         } else if (!contatoEmEspera.isEmpty()) {
             System.out.println("Chamada ativa: " + chamadaAndamento);
@@ -396,15 +362,12 @@ public class TelefoneServiceImpl implements TelefoneService{
     public void EmEspera(String nome) {
         Contato contato = listaDeChamadas.get(nome);
         if (chamadaAtiva) {
-            //System.out.println("Chamada " + contato + " em espera. ");
             if (listaDeEspera.isEmpty()) {
                 listaDeEspera.put(chamadaAndamento, contato);
                 contatoEmEspera = chamadaAndamento;
                 System.out.println("Contato em espera: " + contatoEmEspera);
                 chamadaAndamento = null;
                 chamadaAtiva = false;
-                //contatoEmEspera = null;
-                // TODO: contatoEmEspera substituir por listaEspera;
             } else {
                 contatoEmEspera = chamadaAndamento;
                 chamadaAndamento = listaDeEspera.keySet().iterator().next();
@@ -431,7 +394,6 @@ public class TelefoneServiceImpl implements TelefoneService{
             scanner.nextLine();
             if (opcao == 0) {
                 conferencia.removeAll(conferencia);
-                // chamar desligar todas
                 for (int i = 0; i < conferencia.size(); i++) {
                     desligarChamada(conferencia.get(i));
                 }
@@ -447,16 +409,13 @@ public class TelefoneServiceImpl implements TelefoneService{
                     chamadaAndamento = conferencia.toString();
                     conferencia.removeAll(conferencia);
                     OpcoesTelefone();
-                //} else if (conferencia.size() > 1) {
-                  //  System.out.println("Chamada em andamento: " + conferencia.toString());
-                    // TODO: CORRIGIR LOOP AQUI
+                // TODO: CORRIGIR LOOP AQUI
                 }
                 break;
             } else {
                 System.out.println("Opção inválida. ");
             }
         }
-        //chamadaAtiva = false;
     }
 
     @Override

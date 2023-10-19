@@ -1,7 +1,5 @@
 package telefone.service;
 
-import telefone.model.Contato;
-
 public interface TelefoneService {
     void addContato(String nome, String numero);
     void listarContatos();

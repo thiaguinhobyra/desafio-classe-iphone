@@ -136,9 +136,4 @@ public class SafariServiceImpl implements SafariService{
         System.out.println("Recarregando página...");
         System.out.println("Página atualizada");
     }
-
-    /*public static void main(String[] args) {
-        SafariServiceImpl safariService = new SafariServiceImpl();
-        safariService.opcoes();
-    }*/
 }
