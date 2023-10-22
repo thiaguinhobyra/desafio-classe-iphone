@@ -71,16 +71,6 @@ public class TelefoneServiceImpl implements TelefoneService {
         }
     }
 
-    public void buscarChamada(String nome, String numero) {
-        if (listaDeChamadas.containsKey(nome)) {
-            chamadaAndamento = nome;
-            System.out.println(nome + " - " + nome);
-            opcoes(nome, numero);
-        } else {
-            System.out.println("Chamada não encontrada. ");
-        }
-    }
-
     public void opcoes(String nome, String numero) {
         System.out.println("1. Ligar");
         System.out.println("2. Voltar");
@@ -206,9 +196,6 @@ public class TelefoneServiceImpl implements TelefoneService {
                         contatoEmEspera = null;
                         chamadaAtiva = true;
                     }
-                /*} else {
-                    System.out.println("Não tem chamada. ");
-                    System.out.println("chamando atender 1 else: "+ chamando);*/
                 }
                 System.out.println("1. Teclado: ");
                 System.out.println("2. Mudo: ");
@@ -248,7 +235,8 @@ public class TelefoneServiceImpl implements TelefoneService {
                         OpcoesTelefone();
                         break;
                     case 6:
-                        desligarChamada(nome);
+                        chamando = false;
+                        desligarChamada(chamadaAndamento);
                         break;
                 }
 
@@ -267,7 +255,8 @@ public class TelefoneServiceImpl implements TelefoneService {
             System.out.println("1. Buscar contato");
             System.out.println("2. Adicionar contato");
             System.out.println("3. Correio de voz");
-            if(!listaDeChamadas.isEmpty() || !conferencia.isEmpty()) System.out.println("4. Opções de chamada");
+            System.out.println("4. Voltar");
+            if(!listaDeChamadas.isEmpty() || !conferencia.isEmpty()) System.out.println("5. Opções de chamada");
 
 
             opcao = scanner.nextInt();
@@ -319,6 +308,9 @@ public class TelefoneServiceImpl implements TelefoneService {
                     listarCorreioVoz();
                     break;
                 case 4:
+                    chamando = false;
+                    return;
+                case 5:
                     OpcoesChamada(chamadaAndamento);
                     break;
             }
@@ -330,11 +322,15 @@ public class TelefoneServiceImpl implements TelefoneService {
         if (!conferencia.isEmpty()) {
            contatoEmEspera = null;
             chamadaEmEspera = false;
+            chamando = false;
+
             System.out.println("Chamada " + nome + " encerrada, sem chamadas em espera. ");
             /*TODO: CORRIGIR MSG */
         } else if (!chamadaAndamento.isEmpty()) {
             System.out.println("Chamada " + nome + " encerrada. ");
             listaDeChamadas.remove(chamadaAndamento);
+            chamando = false;
+
             if (!listaDeEspera.isEmpty()) {
                 chamadaAndamento = listaDeEspera.keySet().iterator().next();
                 System.out.println("Chamada ativa: " + chamadaAndamento);
@@ -347,17 +343,18 @@ public class TelefoneServiceImpl implements TelefoneService {
             System.out.println("Chamada ativa: " + chamadaAndamento);
             chamadaAtiva = true;
             chamadaEmEspera = false;
+            chamando = false;
             contatoEmEspera = null;
         } else {
             System.out.println("Nenhuma chamada em andamento.");
             chamadaAtiva = false;
             chamadaAndamento = null;
             contatoEmEspera = null;
+            chamando = false;
             chamadaEmEspera = false;
             System.out.println("Chamada " + nome + " encerrada, sem chamadas em espera. ");
             /*TODO: CORRIGIR MSG */
         }
-        chamando = false;
     }
 
     public void EmEspera(String nome) {

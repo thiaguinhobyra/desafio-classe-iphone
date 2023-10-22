@@ -20,12 +20,25 @@ public class IpodServiceImpl implements IpodService {
         System.out.println("Música adicionada com sucesso! ");
     }
 
-    public void homeIpod() {
+    public boolean homeIpod() {
         if (musicaAtual != null){
-            opcoesIpod();
+            String opcao;
+
+            System.out.println("Escolha tocar ou digite 'voltar': ");
+            if (scanner.hasNextLine()) {
+                opcao = scanner.nextLine();
+
+                if (opcao.equalsIgnoreCase("voltar")) {
+                    return true;
+                }
+                opcoesIpod();
+            } else {
+                System.out.println("Opção inválida. Tente novamente. ");
+            }
         } else {
             listarMusicas();
         }
+        return true;
     }
 
     @Override
@@ -54,7 +67,10 @@ public class IpodServiceImpl implements IpodService {
 
     @Override
     public void selecionarMusica(String titulo) {
-        if (tocando) {
+        if (tocando && musicaAtual.equalsIgnoreCase(titulo)) {
+            System.out.println("A musica já estao em execução");
+            opcoesIpod();
+        } else {
             pausar();
         }
         if (biblioteca.containsKey(titulo)) {
@@ -63,26 +79,26 @@ public class IpodServiceImpl implements IpodService {
         } else {
             System.out.println("Música não encontrada na biblioteca. ");
         }
-        opcoesIpod();
+        homeIpod();
     }
 
     @Override
     public void tocar() {
-        if (musicaAtual != null && tocando) {
-            System.out.println("A música " + musicaAtual + " já está tocando.");
-        } else if (biblioteca.containsKey(musicaAtual)) {
+        if (musicaAtual != null) {
             tocando = true;
             System.out.println("Tocando a música: " + musicaAtual);
             opcoesIpod();
+        } else {
+            System.out.println("Nenhuma música selecionada para tocar.");
         }
     }
 
     @Override
     public void pausar() {
-        if (tocando) {
+        if (tocando && musicaAtual != null) {
             tocando = false;
             System.out.println("Pausando : " + musicaAtual);
-            opcoesIpod();
+            //opcoesIpod();
         } else {
             System.out.println("Nenhuma música tocando no momento.");
         }
@@ -91,6 +107,7 @@ public class IpodServiceImpl implements IpodService {
 
     public void opcoesIpod() {
         if (tocando) {
+            int opcao = 0;
             while (true) {
                 System.out.println("Musica " + musicaAtual + " tocando.");
                 System.out.println();
@@ -100,26 +117,33 @@ public class IpodServiceImpl implements IpodService {
                 System.out.println("3. Biblioteca");
                 System.out.println("4. Voltar");
 
-                int opcao = obterOpcaoUsuario();
+                if (scanner.hasNextInt()) {
+                    opcao = scanner.nextInt();
+                    scanner.nextLine();
 
-                switch (opcao) {
-                    case 1:
-                        pausar();
-                        break;
-                    case 2:
-                        tocando = false;
-                        musicaAtual = null;
-                        return;
-                    case 3:
-                        listarMusicas();
-                        break;
-                    case 4:
-                        return;
-                    default:
-                        System.out.println("Opção inválida. Tente novamentes.");
+                    switch (opcao) {
+                        case 1:
+                            pausar();
+                            break;
+                        case 2:
+                            tocando = false;
+                            musicaAtual = null;
+                            return;
+                        case 3:
+                            listarMusicas();
+                            break;
+                        case 4:
+                            return;
+                        default:
+                            System.out.println("Opção inválida. Tente novamentes.");
+                    }
+                } else {
+                    System.out.println("Opção inválida. Tente novamente.");
+                    scanner.nextLine();
                 }
             }
-        } else if (musicaAtual != null && !tocando){
+        } else if (musicaAtual != null && !tocando) {
+            int opcao = 0;
             while (true) {
                 System.out.println("Musica " + musicaAtual + " pausada.");
                 System.out.println();
@@ -128,36 +152,29 @@ public class IpodServiceImpl implements IpodService {
                 System.out.println("2. Parar");
                 System.out.println("3. Voltar");
 
-                int opcao = obterOpcaoUsuario();
+                if (scanner.hasNextInt()) {
+                    opcao = scanner.nextInt();
+                    scanner.nextLine();
 
-                switch (opcao) {
-                    case 1:
-                        tocar();
-                        tocando = true;
-                        return;
-                    case 2:
-                        tocando = false;
-                        musicaAtual = null;
-                        return;
-                    case 3:
-                        return;
-                    default:
-                        System.out.println("Opção inválida. Tente novamente. ");
+                    switch (opcao) {
+                        case 1:
+                            tocar();
+                            tocando = true;
+                            break;
+                        case 2:
+                            tocando = false;
+                            musicaAtual = null;
+                            return;
+                        case 3:
+                            tocando = false;
+                            return;
+                        default:
+                            System.out.println("Opção inválida. Tente novamente. ");
+                    }
+                } else {
+                    System.out.println("Opção inválida. Tente novamente.");
+                    scanner.nextLine();
                 }
-            }
-        }
-    }
-
-    private int obterOpcaoUsuario() {
-        int opcao;
-        while (true) {
-            if (scanner.hasNextInt()) {
-                opcao = scanner.nextInt();
-                scanner.nextLine();
-                return opcao;
-            } else {
-                System.out.println("Opção inválida. Tente novamente.");
-                scanner.nextLine();
             }
         }
     }

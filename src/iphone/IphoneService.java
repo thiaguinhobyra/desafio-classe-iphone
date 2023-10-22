@@ -15,7 +15,6 @@ public class IphoneService {
         telefoneServiceImpl.addContato("Contato 2", "98999999999");
         telefoneServiceImpl.correioVoz("Mensagem de voz 2");
         telefoneServiceImpl.correioVoz("Mensagem de voz 1");
-        chamando = true;
 
         IpodServiceImpl ipodServiceImpl = new IpodServiceImpl();
         ipodServiceImpl.adicionarMusica("Música 1", "Artista 1", 3);
@@ -48,11 +47,13 @@ public class IphoneService {
                     }
                     break;
                 case 2:
+                    chamando = true;
                     while (true) {
                         if (chamando) {
                             telefoneServiceImpl.atenderChamada("Contato 1");
                             chamando = true;
                             telefoneServiceImpl.atenderChamada("Contato 2");
+                            chamando = false;
                         }
 
                         System.out.println("'1' para abrir Telefone ou 'sair' para voltar para a lista de aplicativos: ");
