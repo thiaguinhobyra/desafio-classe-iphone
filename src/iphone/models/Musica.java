@@ -1,4 +1,4 @@
-package ipod.model;
+package iphone.models;
 
 public class Musica {
     private String titulo;
@@ -15,24 +15,12 @@ public class Musica {
         return titulo;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
     public String getArtista() {
         return artista;
     }
 
-    public void setArtista(String artista) {
-        this.artista = artista;
-    }
-
     public int getTempo() {
         return tempo;
-    }
-
-    public void setTempo(int tempo) {
-        this.tempo = tempo;
     }
 
     @Override
