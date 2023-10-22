@@ -1,6 +1,4 @@
-package ipod.service;
-
-import ipod.model.Musica;
+package iphone.services;
 
 import java.util.Scanner;
 
@@ -10,7 +8,7 @@ public interface IpodService {
     void adicionarMusica(String titulo, String artista, int tempo);
     void listarMusicas();
     void selecionarMusica(String titulo);
-    void tocar(String titulo);
-    void pausar(String titulo);
+    void tocar();
+    void pausar();
 
 }

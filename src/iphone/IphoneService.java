@@ -1,37 +1,14 @@
-import ipod.service.IpodServiceImpl;
-import safari.service.SafariServiceImpl;
-import telefone.model.Contato;
-import telefone.service.TelefoneServiceImpl;
+package iphone;
 
-import java.util.*;
+import iphone.services.servicesOmpl.IpodServiceImpl;
+import iphone.services.servicesOmpl.SafariServiceImpl;
+import iphone.services.servicesOmpl.TelefoneServiceImpl;
 
-public class IPhone {
+import java.util.Scanner;
+
+public class IphoneService {
     private static Scanner scanner = new Scanner(System.in);
     private static boolean chamando = false;
-
-    private String cor;
-    private String marca;
-    private String modelo;
-    private Integer armazenamento;
-    private Integer memoria;
-    private String sistema;
-
-    private IpodServiceImpl iPod;
-    private TelefoneServiceImpl telefone;
-    private SafariServiceImpl safari;
-
-    public IPhone(String cor, String marca, String modelo, Integer armazenamento, Integer memoria, String sistema) {
-        this.cor = cor;
-        this.marca = marca;
-        this.modelo = modelo;
-        this.armazenamento = armazenamento;
-        this.memoria = memoria;
-        this.sistema = sistema;
-        this.iPod = new IpodServiceImpl();
-        this.telefone = new TelefoneServiceImpl();
-        this.safari = new SafariServiceImpl();
-    }
-
     public static void main(String[] args) {
         TelefoneServiceImpl telefoneServiceImpl = new TelefoneServiceImpl();
         telefoneServiceImpl.addContato("Contato 1", "99999999999");
@@ -53,6 +30,7 @@ public class IPhone {
             System.out.println("1. Ipod");
             System.out.println("2. Telefone");
             System.out.println("3. Safari");
+            System.out.println("4. Desligar");
 
             String entrada = scanner.nextLine();
 
@@ -65,14 +43,8 @@ public class IPhone {
             switch (app) {
                 case 1:
                     while (true) {
-                        ipodServiceImpl.listarMusicas();
-                        System.out.println("Escolha o titulo da música ou digite 'sair': ");
-                        String opcao = scanner.nextLine();
-
-                        if (opcao.equalsIgnoreCase("sair")) {
-                            break;
-                        }
-                        ipodServiceImpl.selecionarMusica(opcao);
+                        ipodServiceImpl.homeIpod();
+                        break;
                     }
                     break;
                 case 2:
@@ -86,7 +58,7 @@ public class IPhone {
                         System.out.println("'1' para abrir Telefone ou 'sair' para voltar para a lista de aplicativos: ");
                         String nome = scanner.nextLine();
 
-                        if (nome.equalsIgnoreCase("1")) {
+                        if (nome.equals("1")) {
                             telefoneServiceImpl.OpcoesTelefone();
                         }
 
@@ -100,6 +72,9 @@ public class IPhone {
                         safariService.opcoes();
                         break;
                     }
+                    break;
+                case 4:
+                    System.out.println("Desligando IPhone.");
                     break;
                 default:
                     System.out.println("Opção inválida. ");
