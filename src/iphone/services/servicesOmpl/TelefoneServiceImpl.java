@@ -1,6 +1,7 @@
-package telefone.service;
+package iphone.services.servicesOmpl;
 
-import telefone.model.Contato;
+import iphone.services.TelefoneService;
+import iphone.models.Contato;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-public class TelefoneServiceImpl implements TelefoneService{
+public class TelefoneServiceImpl implements TelefoneService {
     private boolean chamadaAtiva = false;
     private List<String> correioVoz = new ArrayList<>();
     private List<String> conferencia = new ArrayList<>();

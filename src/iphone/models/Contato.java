@@ -1,4 +1,4 @@
-package telefone.model;
+package iphone.models;
 
 public class Contato {
     private String nome;

@@ -1,12 +1,13 @@
-package safari.service;
+package iphone.services.servicesOmpl;
 
-import safari.model.Aba;
+import iphone.models.Aba;
+import iphone.services.SafariService;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class SafariServiceImpl implements SafariService{
+public class SafariServiceImpl implements SafariService {
 
     private Map<String, Aba> abasAbertas = new HashMap<>();
     private Scanner scanner = new Scanner(System.in);

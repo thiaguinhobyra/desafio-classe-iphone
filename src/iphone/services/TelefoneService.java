@@ -1,4 +1,4 @@
-package telefone.service;
+package iphone.services;
 
 public interface TelefoneService {
     void addContato(String nome, String numero);

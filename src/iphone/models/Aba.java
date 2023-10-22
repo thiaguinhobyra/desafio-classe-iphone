@@ -1,4 +1,4 @@
-package safari.model;
+package iphone.models;
 
 public class Aba {
     private String nomeSite;

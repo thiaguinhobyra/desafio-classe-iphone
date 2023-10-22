@@ -1,4 +1,4 @@
-package ipod.model;
+package iphone.models;
 
 public class Musica {
     private String titulo;
@@ -17,6 +17,10 @@ public class Musica {
 
     public String getArtista() {
         return artista;
+    }
+
+    public int getTempo() {
+        return tempo;
     }
 
     @Override

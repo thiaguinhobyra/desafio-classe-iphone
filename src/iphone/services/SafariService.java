@@ -1,4 +1,4 @@
-package safari.service;
+package iphone.services;
 
 public interface SafariService {
     void abaNova(String nomeSite, String url);
